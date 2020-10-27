@@ -1,9 +1,11 @@
-// The main goal of this algorithm is to systematically return the minimum 
-// number of coins needed for a change.
-
 #include <cs50.h>
 #include <stdio.h>
 #include <math.h>
+
+/*
+ * Author: Lionel Ngoubou
+ * Purpose: Return the minimum number of coins needed for a change.
+ */
 
 int main(void)
 {
