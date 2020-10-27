@@ -1,3 +1,6 @@
+// The main goal of this algorithm is to systematically return the minimum 
+// number of coins needed for a change.
+
 #include <cs50.h>
 #include <stdio.h>
 #include <math.h>
@@ -7,7 +10,7 @@ int main(void)
     float dollars;
     
     // prompt the user to enter a positive float; 
-    //if he fails to, re-prompt him for a valid amount
+    // if he fails to, re-prompt him for a valid input
 
     do
     {
@@ -15,32 +18,31 @@ int main(void)
         dollars = get_float("How much: ");
     }
     while (dollars < 0);
-    int n = round(dollars * 100);
-    // Go in the drawer and take the largest value
-    // If it equals the user input, print 1
-    // while the coin is inferior to the change (n), use it
-    // and count the number of times you do an operation
-    int num = 0;
-    while (n >= 25)
+    // to handle float imprecision, we round the value to 100
+    int change = round(dollars * 100);
+    // as long as the change is greater or equals to the largest coin, use it
+    // and count the number of times you do an operation, ie number of coins used
+    int coins = 0;
+    while (change >= 25)
     {
-        n = n - 25;
-        num++;
+        change = change - 25;
+        coins++;
     }
-    while (n < 25 && n >= 10)
+    while (change >= 10)
     {
-        n = n - 10;
-        num++;
+        change = change - 10;
+        coins++;
     }  
-    while (n < 10 && n >= 05)
+    while (change >= 5)
     {
-        n = n - 05;
-        num++;
+        change = change - 5;
+        coins++;
     }
-    while (n < 05 && n >= 01)
+    while (change >= 1)
     {
-        n = n - 01;
-        num++;
+        change = change - 1;
+        coins++;
     }
    
-    printf("number of coins: %i\n", num);
+    printf("number of coins: %i\n", coins);
 }
