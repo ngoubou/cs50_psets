@@ -1,2 +1,2 @@
 # cs50_psets
-CS50 problem sets solutions
+CS50 2020 problem sets solutions
