@@ -6,7 +6,8 @@
 
 /*
  * Author: Lionel Ngoubou
- * Purpose: Check if a credit card numbers are valid.
+ * Purpose: Luhn’s Algorithm implementation :
+ Check if credit card number is valid.
  */
 
 int main(void)
