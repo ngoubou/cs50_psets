@@ -4,7 +4,8 @@
 
 /*
  * Author: Lionel Ngoubou
- * Purpose: Return the minimum number of coins needed for a change.
+ * Purpose: Greedy Algorithm implementation :
+ Return the minimum number of coins needed for a change.
  */
 
 int main(void)
