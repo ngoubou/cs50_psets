@@ -6,7 +6,7 @@
 
 /*
  * Author: Lionel Ngoubou
- * Purpose: Luhn’s Algorithm implementation :
+ * Purpose: Luhn’s Algorithm implementation : 
  Check if credit card number is valid.
  */
 
@@ -22,12 +22,23 @@ int main(void)
     }
     while (card <= 0);
 
-    // convert int to char
+    // convert input to char
     char str[12];
     sprintf(str, "%ld", card);
 
-    // count number of characters in the string
-    if (strlen(str) < 13 || strlen(str) > 16) 
+    if (strlen(str) == 15)
+    {
+        printf("AMEX\n");
+    }
+    else if (strlen(str) == 16)
+    {
+        printf("MASTERCARD\n");
+    }
+    else if (strlen(str) == 13 || strlen(str) == 16)
+    {
+        printf("VISA\n");
+    }
+    else
     {
         printf("INVALID\n");
     }
@@ -35,4 +46,3 @@ int main(void)
 
 
 }
-
