@@ -1,48 +1,61 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <math.h>
-#include <string.h>  
+#include <string.h>
 
 
 /*
  * Author: Lionel Ngoubou
- * Purpose: Luhn’s Algorithm implementation : 
+ * Purpose: Luhn’s Algorithm implementation :
  Check if credit card number is valid.
  */
 
 int main(void)
 {
-    long card;
+    // credit card 1st characters
+    char arr[15] = "434375152535455";
 
-    // prompt the user to enter a positive float; 
+    long input;
+
+    // prompt the user to enter a positive float;
     // if he fails to, re-prompt him for a valid input
     do
     {
-        card = get_long("Number: ");
+        input = get_long("Number: ");
     }
-    while (card <= 0);
+    while (input < 0);
 
     // convert input to char
-    char str[12];
-    sprintf(str, "%ld", card);
+    char card[12];
+    sprintf(card, "%ld", input);
 
-    if (strlen(str) == 15)
-    {
-        printf("AMEX\n");
-    }
-    else if (strlen(str) == 16)
-    {
-        printf("MASTERCARD\n");
-    }
-    else if (strlen(str) == 13 || strlen(str) == 16)
+    // VISA
+    if ((strlen(card) == 13 || strlen(card) == 16) && (card[0] == arr[0]))
     {
         printf("VISA\n");
     }
+    
+    // AMEX
+    else if (strlen(card) == 13 && (((card[0] == arr[1]) && (card[1] == arr[2])) || 
+                                    ((card[0] == arr[3]) && (card[1] == arr[4]))))
+    {
+        printf("AMEX\n");
+    }
+    
+    // MASTERCARD
+    else if (strlen(card) == 16 && (((card[0] == arr[5]) && (card[1] == arr[6])) ||
+                                    ((card[0] == arr[7]) && (card[1] == arr[8])) ||
+                                    ((card[0] == arr[9]) && (card[1] == arr[10])) ||
+                                    ((card[0] == arr[11]) && (card[1] == arr[12])) ||
+                                    ((card[0] == arr[13]) && (card[1] == arr[14]))))
+    {
+        printf("MASTERCARD\n");
+    }
+    
     else
     {
         printf("INVALID\n");
     }
-   
-
-
+  
 }
+
