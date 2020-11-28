@@ -16,7 +16,7 @@ int main(void)
 {
     // credit card 1st characters
     char arr[15] = "434375152535455";
-    char dig[2] = "09";
+    char dig = '0';
 
     long input;
 
@@ -38,8 +38,16 @@ int main(void)
         input /= 10;
         int a = input % 10;
         int b = a * 2;
+        int sum = 0;
+        while (b > 0)
+        {
+
+            int digit = b % 10;
+            b /= 10;
+            sum += digit;
+        }
         input /= 10;
-        c += b;
+        c += sum;
         f += d;
     }
 
@@ -54,9 +62,9 @@ int main(void)
     sprintf(card, "%ld", x);
 
     // VISA
-    printf("%s\n", gg);
+    //printf("%lu\n", strlen(card));
     if ((strlen(card) == 13 || strlen(card) == 16) && (card[0] == arr[0])
-    && (gg[1] == dig[0] || gg[1] == dig[1]))
+    && (gg[1] == dig))
     {
         printf("VISA\n");
     }
@@ -64,7 +72,7 @@ int main(void)
     // AMEX
     else if (strlen(card) == 15 && (((card[0] == arr[1]) && (card[1] == arr[2])) ||
                                     ((card[0] == arr[3]) && (card[1] == arr[4])))
-                                    && (gg[1] == dig[0] || gg[1] == dig[1]))
+                                    && (gg[1] == dig))
     {
         printf("AMEX\n");
     }
@@ -75,7 +83,7 @@ int main(void)
                                     ((card[0] == arr[9]) && (card[1] == arr[10])) ||
                                     ((card[0] == arr[11]) && (card[1] == arr[12])) ||
                                     ((card[0] == arr[13]) && (card[1] == arr[14])))
-                                    && (gg[1] == dig[0] || gg[1] == dig[1]))
+                                    && (gg[1] == dig))
     {
         printf("MASTERCARD\n");
     }
