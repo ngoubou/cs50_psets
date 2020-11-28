@@ -39,13 +39,14 @@ int main(void)
         int a = input % 10;
         int b = a * 2;
         int sum = 0;
+     
         while (b > 0)
         {
-
             int digit = b % 10;
             b /= 10;
             sum += digit;
         }
+     
         input /= 10;
         c += sum;
         f += d;
@@ -60,6 +61,8 @@ int main(void)
     // convert input to char
     char card[16];
     sprintf(card, "%ld", x);
+ 
+    // i should use a for loop in my if statements
 
     // VISA
     if ((strlen(card) == 13 || strlen(card) == 16) && (card[0] == arr[0])
