@@ -62,7 +62,6 @@ int main(void)
     sprintf(card, "%ld", x);
 
     // VISA
-    //printf("%lu\n", strlen(card));
     if ((strlen(card) == 13 || strlen(card) == 16) && (card[0] == arr[0])
     && (gg[1] == dig))
     {
