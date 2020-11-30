@@ -3,7 +3,7 @@
 
 /*
  * Author: Lionel Ngoubou
- * Purpose: Recreate the Super Mario pyramid.
+ * Purpose: Recreate the Super Mario adjacent pyramids.
  */
 
 int main(void)
