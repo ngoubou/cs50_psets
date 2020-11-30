@@ -8,22 +8,24 @@
 
 int main(void)
 {
-    int n;
-    
+    int height;
+
     do
     {
         // prompt the user to enter an integer
-        n = get_int("Height: ");
+        height = get_int("Height: ");
     }
-    while (n < 1 || n > 8);
+    while (height < 1 || height > 8);
 
-// loop through the lines and print a space
-// then a hash at each iteration
+// at each line (iteration) i want n objects
+// these n objects are shared as follow
+// n - i - 1 spaces and the rest are hashes
+// where i is the level we're at (starting at 0)
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < height; i++)
     {
         // print the space characters
-        for (int j = n - 1 - i; j > 0 ; j--)
+        for (int j = height - 1 - i; j > 0 ; j--)
         {
             printf(" ");
         }
@@ -31,12 +33,12 @@ int main(void)
         for (int k = i + 1; k > 0; k--)
         {
             printf("#");
-        
+
         }
         printf("\n");
-         
+
     }
-    
+
 }
 
 
