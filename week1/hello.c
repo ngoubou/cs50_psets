@@ -1,6 +1,11 @@
 #include <cs50.h>
 #include <stdio.h>
 
+/*
+ * Author: Lionel Ngoubou
+ * Purpose: Greet a user by his name.
+ */
+
 int main(void)
 {
     // Prompt user for their name
