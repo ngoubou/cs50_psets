@@ -3,6 +3,7 @@
 #include <math.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 /*
  * Author: Lionel Ngoubou
@@ -10,26 +11,45 @@
    a program that encrypts messages
  */
 
-const int K = 1;
 
-int main(void)
+int main(int argc, string argv[])
 {
     string alph = {"abcdefghijklmnopqrstuvwxyz"};
-  
-    string text = get_string("Gimme dat sauce: ");  
-    // i convert the input to an array so i can loop through
-    string arr[] = {text};
-    
-    for (int i = 0; i < strlen(arr[0]); i++)
+
+    if (argv[1] == 0 || argc > 2) // check if arg is null
     {
-        for (int j = 0; j < strlen(alph); j++)
+        printf("Usage: ./caesar key");
+    }
+
+    else
+    {
+        int key =  atoi(argv[1]);
+
+        if (key == 0)
         {
-            if (arr[0][i] == alph[j])
+            printf("Usage: ./caesar key");
+        }
+
+        else
+        {
+            string text = get_string("Gimme dat sauce: ");
+
+            //convert the input to an array so i can loop through
+            string arr[] = {text};
+
+            printf("ciphertext: ");
+            for (int i = 0; i < strlen(arr[0]); i++)
             {
-                printf("%c", alph[j + K]);
+                for (int j = 0; j < strlen(alph); j++)
+                {
+                    if (arr[0][i] == alph[j])
+                    {
+                        printf("%c", alph[j + key]);
+                    }
+                }
             }
+
         }
     }
     printf("\n");
- 
-}    
+}
