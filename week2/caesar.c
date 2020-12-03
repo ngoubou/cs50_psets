@@ -15,17 +15,32 @@
 int main(int argc, string argv[])
 {
     string alph = {"abcdefghijklmnopqrstuvwxyz"};
-    
+    // printf("%s\n", argv[1]);
 
     // check if arg is null
-    if (argv[1] == 0 || argc > 2) 
+    if (argv[1] == 0 || argc > 2)
     {
         printf("Usage: ./caesar key\n");
         return 1;
     }
-    // handles non numeric key
-   
+    // handle non numeric key
+    for (int i = 0; i < strlen(argv[1]); i++)
+    {
+        // i was handling numeric values instead of the opposite
+        // so i added '!' to fix that
+        if (!(argv[1][i] >= '0' && argv[1][i] <= '9'))
+        {
+            printf("Usage: ./caesar key\n");
+            return 1;
+        }
 
+    }
+    // check if arg is null
+    if (argv[1] == 0 || argc > 2)
+    {
+        printf("Usage: ./caesar key\n");
+        return 1;
+    }
     else
     {
         // if it's not a number
