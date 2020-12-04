@@ -7,89 +7,99 @@
 
 /*
  * Author: Lionel Ngoubou
- * Purpose: Substitution cipher implementation :
+ * Purpose: Caesar’s cipher implementation :
    a program that encrypts messages
  */
 
+
 int main(int argc, string argv[])
 {
-    //printf("%lu\n", strlen(argv[1]));
+
     string alph = {"abcdefghijklmnopqrstuvwxyz"};
-    
-    // Handle lack of key and its length
-    if (argv[1] == 0 || strlen(argv[1]) != 26)
+
+    // Check if there is more than 1 key or if it's null
+    if (argv[1] == 0 || argc > 2)
     {
-        printf("The key is either missing or is not 26 characters\n");
+        printf("Usage: ./caesar key\n");
         return 1;
     }
 
-    // Handle non alphabetical characters
+    // Handle non numeric key
     for (int i = 0; i < strlen(argv[1]); i++)
     {
-        if (!isalpha(argv[1][i]))
+        if (!(argv[1][i] >= '0' && argv[1][i] <= '9'))
         {
-            printf("The key must be alphabetical\n");
+            printf("Usage: ./caesar key\n");
             return 1;
         }
+
     }
-    // Handle duplicate letters
-    int count = 0;
-    for (int i = 0; i < 26 - 1; i++)
+
+    //  Encrypt valid numeric keys
+    if (argv[1] > 0)
     {
-        for (int j = i + 1; j < 26; j++)
+        int key =  atoi(argv[1]);
+
+        // If it's not a number, exit
+        if (key == 0)
         {
-            if (argv[1][i] == argv[1][j])
-            {
-                //printf("you da best bb\n");
-                count++;
-            }
+            printf("Usage: ./caesar key\n");
+            return 1;
         }
-    }
-    if (count > 0)
-    {
-        printf("There are repetitive characters in the key\n");
-        return 1;
-    }
-    
-    
-    // Encrypt valid keys
-    if (strlen(argv[1]) == 26)
-    {
-        string text = get_string("Gimme dat sauce: ");
-        string arr[] = {text};
-        printf("ciphertext: ");
-        
-        
-        for (int i = 0; i < strlen(arr[0]); i++)
+
+        else
         {
-            // Handle spaces non-alphanumeric symbols and digits
-            if (isspace(arr[0][i]) || !isalnum(arr[0][i]) || isdigit(arr[0][i]))
+            string text = get_string("Gimme dat sauce: ");
+
+            // i convert the input to an array so i can loop through
+            string arr[] = {text};
+            // the text to print before the output
+            printf("ciphertext: ");
+
+            for (int i = 0; i < strlen(arr[0]); i++)
             {
-                printf("%c", arr[0][i]);
-            }       
-        
-            for (int j = 0; j < strlen(alph); j++)
-            {
-                // Compare index of letter in key to the one in alphabet
-                // print the letter that corresponds to the matching index in key
-                if (arr[0][i] == alph[j])
+                // Handle spaces and non-alphanumeric symbols
+                if (isspace(arr[0][i]) || !isalnum(arr[0][i]))
                 {
-                    printf("%c", tolower(argv[1][j]));
+                    printf("%c", arr[0][i]);
                 }
-                // Handle majuscule letters
-                else if (isupper(arr[0][i]))
+
+                for (int j = 0; j < strlen(alph); j++)
                 {
-                    if (toupper(arr[0][i]) == toupper(alph[j]))
+                    // If the characters are equals print the next one in the alphabet
+                    if (arr[0][i] == alph[j])
                     {
-                        printf("%c", toupper(argv[1][j]));
+                        // Cipher algorithm: ci = (pi + k) % 26
+                        // If j + key is between 26 & 50, iterate at the start
+                        if (j + key > 25 && j + key < 51)
+                        {
+                            printf("%c", alph[j + key - 26]);
+                        }
+                        else if (j + key > 50)
+                        {
+                            printf("%c", alph[(j + key - 26) % 26]);
+                        }
+                        else
+                        {
+                            printf("%c", alph[j + key]);
+                        }
                     }
+
+                    // Handle majuscule characters
+                    // If it's a maj put the next one to maj
+                    else if (isupper(arr[0][i]))
+                    {
+                        if (toupper(arr[0][i]) == toupper(alph[j]))
+                        {
+                            printf("%c", toupper(alph[j + key]));
+                        }
+                    }
+
                 }
-                 
-            }    
+            }
+
         }
-        return 0;
     }
-    
-    
-    printf("\n");    
+    printf("\n");
+    return 0;
 }
