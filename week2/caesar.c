@@ -14,17 +14,17 @@
 
 int main(int argc, string argv[])
 {
+    
     string alph = {"abcdefghijklmnopqrstuvwxyz"};
-    // printf("%s\n", argv[1]);
 
-    // check if arg is null or 
-    // if there are more than 1 key provided
+    // Check if there is more than 1 key or if it's 
     if (argv[1] == 0 || argc > 2)
     {
         printf("Usage: ./caesar key\n");
         return 1;
     }
-    // handle non numeric key
+    
+    // Handle non numeric key
     for (int i = 0; i < strlen(argv[1]); i++)
     {
         if (!(argv[1][i] >= '0' && argv[1][i] <= '9'))
@@ -34,13 +34,13 @@ int main(int argc, string argv[])
         }
 
     }
-  
+    
+    // For numeric keys
     if (argv[1] > 0)
     {
-        // if it's not a number
-        // return 1 and exit
         int key =  atoi(argv[1]);
-
+        
+        // If it's not a number, exit
         if (key == 0)
         {
             printf("Usage: ./caesar key\n");
@@ -53,24 +53,24 @@ int main(int argc, string argv[])
 
             // i convert the input to an array so i can loop through
             string arr[] = {text};
-
+            // the text to print before the output
             printf("ciphertext: ");
+            
             for (int i = 0; i < strlen(arr[0]); i++)
             {
-                // check if it's space or nonalphanum and print the same thing
+                // Handle spaces and non-alphanumeric symbols
                 if (isspace(arr[0][i]) || !isalnum(arr[0][i]))
                 {
                     printf("%c", arr[0][i]);
                 }
 
-
                 for (int j = 0; j < strlen(alph); j++)
                 {
-
-                    // if the characters are equals print the next one
+                    // If the characters are equals print the next one in the alphabet
                     if (arr[0][i] == alph[j])
                     {
-                        // if j + key is between 26 & 50, iterate at the start
+                        // Cipher algorithm: ci = (pi + k) % 26
+                        // If j + key is between 26 & 50, iterate at the start
                         if (j + key > 25 && j + key < 51)
                         {
                             printf("%c", alph[j + key - 26]);
@@ -83,9 +83,10 @@ int main(int argc, string argv[])
                         {
                             printf("%c", alph[j + key]);
                         }
-
                     }
-                    // if it's a maj put the next one to maj
+                    
+                    // Handle majuscule characters
+                    // If it's a maj put the next one to maj
                     else if (isupper(arr[0][i]))
                     {
                         if (toupper(arr[0][i]) == toupper(alph[j]))
