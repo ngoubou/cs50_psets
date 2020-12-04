@@ -16,14 +16,14 @@ int main(int argc, string argv[])
     //printf("%lu\n", strlen(argv[1]));
     string alph = {"abcdefghijklmnopqrstuvwxyz"};
 
-    // Handle lack of key and its length
+    // Handle lack of key and invalid length
     if (argv[1] == 0 || strlen(argv[1]) != 26)
     {
         printf("The key is either missing or is not 26 characters\n");
         return 1;
     }
 
-    // Handle non alphabetical characters
+    // Handle non alphabetical characters in key
     for (int i = 0; i < strlen(argv[1]); i++)
     {
         if (!isalpha(argv[1][i]))
@@ -32,7 +32,7 @@ int main(int argc, string argv[])
             return 1;
         }
     }
-    // Handle duplicate letters
+    // Handle duplicate letters in key
     int count = 0;
     for (int i = 0; i < 26 - 1; i++)
     {
@@ -62,7 +62,7 @@ int main(int argc, string argv[])
 
         for (int i = 0; i < strlen(arr[0]); i++)
         {
-            // Handle spaces non-alphanumeric symbols and digits
+            // Handle spaces, non-alphanumeric symbols and digits
             if (isspace(arr[0][i]) || !isalnum(arr[0][i]) || isdigit(arr[0][i]))
             {
                 printf("%c", arr[0][i]);
