@@ -62,8 +62,8 @@ int main(int argc, string argv[])
         
         for (int i = 0; i < strlen(arr[0]); i++)
         {
-            // Handle spaces and non-alphanumeric symbols
-            if (isspace(arr[0][i]) || !isalnum(arr[0][i]))
+            // Handle spaces non-alphanumeric symbols and digits
+            if (isspace(arr[0][i]) || !isalnum(arr[0][i]) || isdigit(arr[0][i]))
             {
                 printf("%c", arr[0][i]);
             }       
@@ -74,12 +74,17 @@ int main(int argc, string argv[])
                 // print the letter that corresponds to the matching index in key
                 if (arr[0][i] == alph[j])
                 {
-                    printf("%c", argv[1][j]);
+                    printf("%c", tolower(argv[1][j]));
                 }
-            
-                 // Handle majuscule letters
-                
-                
+                // Handle majuscule letters
+                else if (isupper(arr[0][i]))
+                {
+                    if (toupper(arr[0][i]) == toupper(alph[j]))
+                    {
+                        printf("%c", toupper(argv[1][j]));
+                    }
+                }
+                 
             }    
         }    
     }
