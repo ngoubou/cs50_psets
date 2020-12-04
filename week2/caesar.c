@@ -17,7 +17,7 @@ int main(int argc, string argv[])
     
     string alph = {"abcdefghijklmnopqrstuvwxyz"};
 
-    // Check if there is more than 1 key or if it's 
+    // Check if there is more than 1 key or if it's null
     if (argv[1] == 0 || argc > 2)
     {
         printf("Usage: ./caesar key\n");
