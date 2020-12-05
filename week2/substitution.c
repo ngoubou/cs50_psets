@@ -60,26 +60,26 @@ int main(int argc, string argv[])
         printf("ciphertext: ");
 
 
-        for (int i = 0; i < strlen(arr[0]); i++)
+        for (int i = 0; i < strlen(text); i++)
         {
             // Handle spaces, non-alphanumeric symbols and digits
-            if (isspace(arr[0][i]) || !isalnum(arr[0][i]) || isdigit(arr[0][i]))
+            if (isspace(text[i]) || !isalnum(text[i]) || isdigit(text[i]))
             {
-                printf("%c", arr[0][i]);
+                printf("%c", text[i]);
             }
 
             for (int j = 0; j < strlen(alph); j++)
             {
                 // Compare index of letter in key to the one in alphabet
                 // print the letter that corresponds to the matching index in key
-                if (arr[0][i] == alph[j])
+                if (text[i] == alph[j])
                 {
                     printf("%c", tolower(argv[1][j]));
                 }
                 // Handle majuscule letters
-                else if (isupper(arr[0][i]))
+                else if (isupper(text[i]))
                 {
-                    if (toupper(arr[0][i]) == toupper(alph[j]))
+                    if (toupper(text[i]) == toupper(alph[j]))
                     {
                         printf("%c", toupper(argv[1][j]));
                     }
