@@ -27,7 +27,7 @@ int main(void)
     // To handle float imprecision, we round the value to 100
     int change = round(dollars * 100);
 
-    // As long as the change is greater or equals to the largest coin, use it
+    // As long as the change is greater or equaled to the largest coin, use it
     // and count the number of times you do an operation, ie number of coins used
     int coins = 0;
     string array[] = {"25", "10", "5", "1"};
