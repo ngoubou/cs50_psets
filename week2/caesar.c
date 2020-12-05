@@ -51,23 +51,21 @@ int main(int argc, string argv[])
         {
             string text = get_string("Gimme dat sauce: ");
 
-            // i convert the input to an array so i can loop through
-            string arr[] = {text};
             // the text to print before the output
             printf("ciphertext: ");
 
-            for (int i = 0; i < strlen(arr[0]); i++)
+            for (int i = 0; i < strlen(text); i++)
             {
                 // Handle spaces and non-alphanumeric symbols
-                if (isspace(arr[0][i]) || !isalnum(arr[0][i]))
+                if (isspace(text[i]) || !isalnum(text[i]))
                 {
-                    printf("%c", arr[0][i]);
+                    printf("%c", text[i]);
                 }
 
                 for (int j = 0; j < strlen(alph); j++)
                 {
                     // If the characters are equals print the next one in the alphabet
-                    if (arr[0][i] == alph[j])
+                    if (text[i] == alph[j])
                     {
                         // Cipher algorithm: ci = (pi + k) % 26
                         // If j + key is between 26 & 50, iterate at the start
@@ -87,9 +85,9 @@ int main(int argc, string argv[])
 
                     // Handle majuscule characters
                     // If it's a maj put the next one to maj
-                    else if (isupper(arr[0][i]))
+                    else if (isupper(text[i]))
                     {
-                        if (toupper(arr[0][i]) == toupper(alph[j]))
+                        if (toupper(text[i]) == toupper(alph[j]))
                         {
                             printf("%c", toupper(alph[j + key]));
                         }
