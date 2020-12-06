@@ -26,12 +26,12 @@ int main(void)
 
     for (int i = 0; i < height; i++)
     {
-        // Print the space characters
+        // Print the space
         for (int space = height - 1 - i; space > 0 ; space--)
         {
             printf(" ");
         }
-        // Print the hashes
+        // Print the hash
         for (int hash = i + 1; hash > 0; hash--)
         {
             printf("#");
