@@ -10,6 +10,8 @@
  */
 
 //Update : Improved my solution using array and a for loop
+
+// Number of values in my array
 const int N = 4;
 
 int main(void)
@@ -30,13 +32,13 @@ int main(void)
     // As long as the change is greater or equaled to the largest coin, use it
     // and count the number of times you do an operation, ie number of coins used
     int coins = 0;
-    string array[] = {"25", "10", "5", "1"};
+    int array[] = {25, 10, 5, 1};
 
     for (int i = 0; i < N; i++)
     {
-        while (change >= atoi(array[i]))
+        while (change >= array[i])
         {
-            change = change - atoi(array[i]);
+            change = change - array[i];
             coins++;
         }
     }
