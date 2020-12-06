@@ -51,7 +51,7 @@ int main(int argc, string argv[])
         {
             string text = get_string("Gimme dat sauce: ");
 
-            // the text to print before the output
+            // Text to print before the output
             printf("ciphertext: ");
 
             for (int i = 0; i < strlen(text); i++)
