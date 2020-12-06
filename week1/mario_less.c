@@ -12,24 +12,26 @@ int main(void)
 
     do
     {
-        // prompt the user to enter an integer
+        // Prompt the user to enter an integer
         height = get_int("Height: ");
     }
     while (height < 1 || height > 8);
 
-// at each line (iteration) i want n objects
-// these n objects are shared as follow
-// n - i - 1 spaces and the rest are hashes
+// At each line (iteration), I want n objects
+// where n = height.
+// These n objects are shared as follow :
+// n = space + hash; 
+// space = height - hash et hash = i + 1
 // where i is the level we're at (starting at 0)
 
     for (int i = 0; i < height; i++)
     {
-        // print the space characters
+        // Print the space characters
         for (int space = height - 1 - i; space > 0 ; space--)
         {
             printf(" ");
         }
-        // print the hashes
+        // Print the hashes
         for (int hash = i + 1; hash > 0; hash--)
         {
             printf("#");
