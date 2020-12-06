@@ -27,4 +27,4 @@ for i in range(height):
     for k in range(i + 1, 0, -1):
         print("#", end='')
     
-    print('\n', end='')
+    print('\n', end='') 
