@@ -15,13 +15,14 @@ int count_sentences(string text);
 
 int main(void)
 {
-    // prompt user to enter a string
+    // Prompt user to enter a string
     string text = get_string("Text: ");
 
-    //letters and sentences per 100 words
+    // Letters and sentences per 100 words
     float l = (100 * (float) count_letters(text)) / (float) count_words(text);
     float s = (100 * (float) count_sentences(text)) / (float) count_words(text);
-
+    
+    // Coleman-Liau index formula
     int index = round(0.0588 * l - 0.296 * s - 15.8);
 
     if (index >= 16)
@@ -41,59 +42,45 @@ int main(void)
 int count_letters(string text)
 {
     int len = strlen(text);
-    int nchar = 0;
+    int letters = 0;
 
     for (int i = 0; i != len; i++)
     {
         if (!isspace(text[i]) && isalnum(text[i]))
         {
-            nchar++;
+            letters++;
         }
     }
-    return nchar;
+    return letters;
 }
 
 int count_words(string text)
 {
     int len = strlen(text);
-    int nchar = 0;
-    int count = 0;
+    int words = 0;
 
     for (int i = 0; i != len; i++)
     {
-        // number of letters
-        if (!isspace(text[i]) && isalnum(text[i]))
-        {
-            nchar++;
-        }
-        // number of words
         if (isspace(text[i]) && !isalnum(text[i]))
         {
-            count++;
+            words++;
         }
 
     }
-    return count + 1;
+    return words + 1;
 }
 
 int count_sentences(string text)
 {
     int len = strlen(text);
-    int nchar = 0;
-    int count = 0;
+    int sent = 0;
 
     for (int i = 0; i != len; i++)
     {
-        // number of letters
-        if (!isspace(text[i]) && isalnum(text[i]))
-        {
-            nchar++;
-        }
-        // number of sentences
         if (text[i] == '.' || text[i] == '?' || text[i] == '!')
         {
-            count++;
+            sent++;
         }
     }
-    return count;
+    return sent;
 }
