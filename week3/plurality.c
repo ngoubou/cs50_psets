@@ -94,11 +94,14 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 string print_winner(void)
 {
-    while (candidates[0].votes < candidates[1].votes || candidates[1].votes < candidates[2].votes || candidates[2].votes < candidates[3].votes)
+    while (candidates[0].votes < candidates[1].votes || candidates[1].votes < candidates[2].votes || candidates[2].votes < candidates[3].votes ||
+            candidates[3].votes < candidates[4].votes || candidates[4].votes < candidates[5].votes || candidates[5].votes < candidates[6].votes ||
+            candidates[6].votes < candidates[7].votes || candidates[7].votes < candidates[8].votes)
     {
         for (int i = 0; i < candidate_count; i++)
         {
-            if (candidates[i].votes <= candidates[i+1].votes)
+            // The last condition accounts for memory issues so it doesn't access elements not in array
+            if (candidates[i].votes <= candidates[i+1].votes && i+1 < candidate_count)
             {
                 int tmp = candidates[i].votes;
                 string tmp_names = candidates[i].name;
