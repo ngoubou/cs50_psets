@@ -1,6 +1,9 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <math.h>
 #include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 // Max number of candidates
 #define MAX 9
@@ -21,7 +24,7 @@ int candidate_count;
 
 // Function prototypes
 bool vote(string name);
-void print_winner(void);
+string print_winner(void);
 
 int main(int argc, string argv[])
 {
@@ -44,7 +47,8 @@ int main(int argc, string argv[])
         candidates[i].name = argv[i + 1];
         candidates[i].votes = 0;
     }
-
+    // printf("%i\n", candidates[0].votes);
+    // printf("%i\n", candidates[1].votes);
     int voter_count = get_int("Number of voters: ");
 
     // Loop over all voters
@@ -57,6 +61,9 @@ int main(int argc, string argv[])
         {
             printf("Invalid vote.\n");
         }
+        //printf("%i\n", vote(name));
+        //printf("%i\n", candidates[i].votes);
+        //printf("%s\n", candidates[i].name);
     }
 
     // Display winner of election
@@ -64,17 +71,52 @@ int main(int argc, string argv[])
 }
 
 // Update vote totals given a new vote
+
+// A priori, the below function works
 bool vote(string name)
 {
-    // TODO
+    // Linear search: go through all candidates names
+    // if it equals name of vote, increment vote count
+
+    for (int j = 0; j < candidate_count; j++)
+    {
+        if (strcmp(name, candidates[j].name) == 0)
+        {
+            candidates[j].votes += 1;
+            return true;
+        }
+    }
+
     return false;
+
 }
 
 // Print the winner (or winners) of the election
-void print_winner(void)
+string print_winner(void)
 {
-    // TODO
-    return;
+    int highest_vote = candidates[0].votes;
+    int tie = candidates[0].votes;
+    string highest_name;
+    string tie[candidate_count];
+    
+    for (int i = 1; i < candidate_count; i++)
+    {
+        if (candidates[i].votes >= highest_vote)
+        {
+            highest_vote = candidates[i].votes;
+            highest_name =  candidates[i].name;
+            
+            if (candidates[i].votes == highest_vote)
+            {
+                tie = highest_vote;
+                highest_name =  candidates[i].name;
+           
+            }
+        }
+        
+    }
+    
+    printf("%s\n", highest_name);
+    return 0;
 }
-
 
