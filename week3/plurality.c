@@ -95,27 +95,22 @@ bool vote(string name)
 string print_winner(void)
 {
     int highest_vote = candidates[0].votes;
-    int tie = candidates[0].votes;
+    //int tie = candidates[0].votes;
     string highest_name;
     string tie[candidate_count];
-    
-    for (int i = 1; i < candidate_count; i++)
+
+    // Starting the loop at 1, it was printing the last vote entered
+    // even if it had not the most votes
+    for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes >= highest_vote)
         {
             highest_vote = candidates[i].votes;
             highest_name =  candidates[i].name;
-            
-            if (candidates[i].votes == highest_vote)
-            {
-                tie = highest_vote;
-                highest_name =  candidates[i].name;
-           
-            }
         }
-        
+
     }
-    
+
     printf("%s\n", highest_name);
     return 0;
 }
