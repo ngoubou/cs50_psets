@@ -215,6 +215,13 @@ bool print_winner(void)
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].eliminated == false)
+        {
+            printf("%i\n", candidates[i].votes);
+        }
+    }
     // TODO
     return 0;
 }
