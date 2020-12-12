@@ -152,10 +152,48 @@ void tabulate(void)
             if (preferences[voter][0] == choice)
             {
                 candidates[choice].votes += 1;
+                //candidates[voter].eliminated = false;
                 //break;
             }
         }
+
     }
+
+    // Sort the array in descending order
+    while (candidates[0].votes < candidates[1].votes || candidates[1].votes < candidates[2].votes || candidates[2].votes < candidates[3].votes ||
+            candidates[3].votes < candidates[4].votes || candidates[4].votes < candidates[5].votes || candidates[5].votes < candidates[6].votes ||
+            candidates[6].votes < candidates[7].votes || candidates[7].votes < candidates[8].votes)
+    {
+        for (int i = 0; i < candidate_count; i++)
+        {
+            // The last condition accounts for memory issues so it doesn't access elements not in array
+            if (candidates[i].votes <= candidates[i+1].votes && i+1 < candidate_count)
+            {
+                int tmp = candidates[i].votes;
+                string tmp_names = candidates[i].name;
+
+                candidates[i].votes = candidates[i+1].votes;
+                candidates[i].name = candidates[i+1].name;
+
+                candidates[i+1].votes = tmp;
+                candidates[i+1].name = tmp_names;
+            }
+        }
+    }
+
+    // Eliminate the candidates with fewest votes
+    for (int j = 1; j < candidate_count; j++)
+    {
+        if (candidates[0].votes == candidates[j].votes)
+        {
+            candidates[j].eliminated = false;
+        }
+        else
+        {
+            candidates[j].eliminated = true;
+        }
+    }
+
     // TODO
     return;
 }
