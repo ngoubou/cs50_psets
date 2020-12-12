@@ -100,6 +100,7 @@ string print_winner(void)
     {
         for (int i = 0; i < candidate_count; i++)
         {
+            // Sort the array in descending order
             // The last condition accounts for memory issues so it doesn't access elements not in array
             if (candidates[i].votes <= candidates[i+1].votes && i+1 < candidate_count)
             {
