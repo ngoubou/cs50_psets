@@ -117,6 +117,7 @@ string print_winner(void)
     }
     
     printf("%s\n", candidates[0].name);
+    // Handling ties
     for (int i = 1; i < candidate_count; i++)
     {
         if (candidates[0].votes == candidates[i].votes)
