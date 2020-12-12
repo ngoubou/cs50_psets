@@ -142,9 +142,13 @@ bool vote(int voter, int rank, string name)
     return false;
 }
 
+//Recall that for a voter i, their top choice candidate is represented by preferences[i][0], their second choice candidate by preferences[i][1], etc.
+
+// I did not handle “instant runoff” in my function
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
+    // Update vote counts for non-eliminated candidates
     for (int voter = 0; voter < voter_count; voter++)
     {
         for (int choice = 0; choice < candidate_count; choice++)
@@ -193,7 +197,7 @@ void tabulate(void)
             candidates[j].eliminated = true;
         }
     }
-    
+
     return;
 }
 
@@ -213,11 +217,19 @@ bool print_winner(void)
 }
 
 // Return the minimum number of votes any remaining candidate has
+
+// The function should return the minimum vote total for any candidate who is still in the election.
+
+// You’ll likely want to loop through the candidates to find the one who is both still in the election and has the fewest number of votes.
+// What information should you keep track of as you loop through the candidates?
+
+// :( find_min returns minimum number of votes for candidate
+
 int find_min(void)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false && candidates[i].votes <= candidates[i - 1].votes)
         {
             return candidates[i].votes;
         }
@@ -237,7 +249,7 @@ bool is_tie(int min)
             return true;
         }
     }
-    
+
     return false;
 }
 
