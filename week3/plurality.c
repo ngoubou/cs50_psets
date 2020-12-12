@@ -86,36 +86,34 @@ bool vote(string name)
             return true;
         }
     }
-
     return false;
-
 }
 
 // Print the winner (or winners) of the election
 string print_winner(void)
 {
+    // Sort the array in descending order
     while (candidates[0].votes < candidates[1].votes || candidates[1].votes < candidates[2].votes || candidates[2].votes < candidates[3].votes ||
             candidates[3].votes < candidates[4].votes || candidates[4].votes < candidates[5].votes || candidates[5].votes < candidates[6].votes ||
             candidates[6].votes < candidates[7].votes || candidates[7].votes < candidates[8].votes)
     {
         for (int i = 0; i < candidate_count; i++)
         {
-            // Sort the array in descending order
             // The last condition accounts for memory issues so it doesn't access elements not in array
             if (candidates[i].votes <= candidates[i+1].votes && i+1 < candidate_count)
             {
                 int tmp = candidates[i].votes;
                 string tmp_names = candidates[i].name;
-                
+
                 candidates[i].votes = candidates[i+1].votes;
                 candidates[i].name = candidates[i+1].name;
-                
+
                 candidates[i+1].votes = tmp;
                 candidates[i+1].name = tmp_names;
             }
         }
     }
-    
+
     printf("%s\n", candidates[0].name);
     // Handling ties
     for (int i = 1; i < candidate_count; i++)
@@ -127,4 +125,3 @@ string print_winner(void)
     }
     return 0;
 }
- 
