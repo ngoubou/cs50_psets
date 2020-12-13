@@ -163,6 +163,26 @@ void tabulate(void)
 
     }
 
+    // Create an array that stores candidates‘ names
+    // before they are sorted
+    // then compare those names to the ones in the sorted array
+    // if candidates[i].name == test[i].names
+    //        test[i].eliminated == candidates[i].eliminated
+
+    string name[candidate_count];
+    int votes[candidate_count];
+    bool eliminated[candidate_count];
+
+    for (int i = 0; i < candidate_count; i++)
+    {
+         name[i] = candidates[i].name;
+         votes[i] = candidates[i].votes;
+         //eliminated[i] = candidates[i].eliminated;
+    }
+
+
+
+
     // Sort the array in descending order
     while (candidates[0].votes < candidates[1].votes || candidates[1].votes < candidates[2].votes || candidates[2].votes < candidates[3].votes ||
             candidates[3].votes < candidates[4].votes || candidates[4].votes < candidates[5].votes || candidates[5].votes < candidates[6].votes ||
@@ -185,6 +205,7 @@ void tabulate(void)
         }
     }
 
+
     // Eliminate the candidates with fewest votes
     for (int j = 1; j < candidate_count; j++)
     {
@@ -195,8 +216,76 @@ void tabulate(void)
         else
         {
             candidates[j].eliminated = true;
+
         }
     }
+
+       
+    /* handling second round */
+    
+       // voter whose top choice is eliminated
+       // eliminated candidate who was top choice
+
+// If no candidate has more than 50% of the vote, then an “instant runoff” occurrs.
+// The candidate who received the fewest number of votes is eliminated from the election,
+// and anyone who originally chose that candidate as their first preference now has their second preference considered.
+
+// Recall that for a voter i, their top choice candidate is represented by preferences[i][0], their second choice candidate by preferences[i][1], etc.
+
+// :( tabulate handles multiple rounds of preferences
+// Recall that at each stage in the runoff, every voter effectively votes for their top-preferred candidate who has not already been eliminated.
+
+    for (int i = 0; i < candidate_count; i++)
+    {
+        for (int j = 0; j < candidate_count; j++)
+        {
+            if (name[i] == candidates[j].name)
+            {
+                eliminated[i] = candidates[j].eliminated;
+            }
+        }
+    }
+    
+    for (int j = 0; j < voter_count; j++)
+        for (int k = 0; k < candidate_count; k++)
+
+            if (eliminated[k] == true && preferences[j][0] == k)
+            {
+                votes[preferences[j][0]] -= 1;
+                preferences[j][0] = preferences[j][1];
+                //printf("%i\n", );
+                votes[preferences[j][0]] += 1;
+                break;
+                //eliminated[preferences[j][1]] = true;
+            }
+
+    for (int i = 0; i < candidate_count; i++)
+    {
+        for (int j = 0; j < candidate_count; j++)
+        {
+            if (name[i] == candidates[j].name)
+            {
+                // changer le i pour j pour égalité de gauche
+                candidates[j].votes = votes[i];
+            }
+        }
+    }
+    
+    // Eliminate the candidates with fewest votes 2nd round
+    for (int j = 1; j < candidate_count; j++)
+    {
+        if (candidates[0].votes == candidates[j].votes)
+        {
+            candidates[j].eliminated = false;
+        }
+        else
+        {
+            candidates[j].eliminated = true;
+
+        }
+    }
+    
+  
 
     return;
 }
@@ -217,19 +306,11 @@ bool print_winner(void)
 }
 
 // Return the minimum number of votes any remaining candidate has
-
-// The function should return the minimum vote total for any candidate who is still in the election.
-
-// You’ll likely want to loop through the candidates to find the one who is both still in the election and has the fewest number of votes.
-// What information should you keep track of as you loop through the candidates?
-
-// :( find_min returns minimum number of votes for candidate
-
-int find_min(void)
+int find_min(void) //*
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].eliminated == false && candidates[i].votes <= candidates[i - 1].votes)
+        if (candidates[i].eliminated == false && candidates[i].votes >= candidates[i + 1].votes)
         {
             return candidates[i].votes;
         }
