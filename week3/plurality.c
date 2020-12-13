@@ -5,6 +5,14 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+/*
+ * Author: Lionel Ngoubou
+ * Purpose: Plurality implementation :
+   a program that runs a plurality election
+ */
+
+/* “Determination, dedication, motivation“ J. Ivy */
+
 // Max number of candidates
 #define MAX 9
 
