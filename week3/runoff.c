@@ -220,9 +220,9 @@ void tabulate(void)
         }
     }
 
-       
+
     /* handling second round */
-    
+
        // voter whose top choice is eliminated
        // eliminated candidate who was top choice
 
@@ -237,7 +237,7 @@ void tabulate(void)
 
     // mettre ça dans une while loop
     // en mettant comme condition tant que il y a un eliminated qui est true
-    
+
     for (int i = 0; i < candidate_count; i++)
     {
         for (int j = 0; j < candidate_count; j++)
@@ -248,7 +248,7 @@ void tabulate(void)
             }
         }
     }
-    
+
     for (int j = 0; j < voter_count; j++)
         for (int k = 0; k < candidate_count; k++)
 
@@ -273,7 +273,7 @@ void tabulate(void)
             }
         }
     }
-    
+
     // Eliminate the candidates with fewest votes 2nd round
     for (int j = 1; j < candidate_count; j++)
     {
@@ -287,8 +287,8 @@ void tabulate(void)
 
         }
     }
-    
-  
+
+
 
     return;
 }
@@ -322,30 +322,28 @@ int find_min(void) //*
     return 0;
 }
 
-// Recall that a tie happens if every candidate still in the election has the same number of votes. 
+// Recall that a tie happens if every candidate still in the election has the same number of votes.
 // Note, too, that the is_tie function takes an argument min, which is the smallest number of votes any candidate currently has.
 //How might you use that information to determine if the election is a tie (or, conversely, not a tie)?
 
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    for (int i = 1; i < candidate_count; i++)
+    //int sum = 0;
+    for (int i = 0; i < candidate_count; i++)
     {
-        // :) is_tie detects tie after some candidates have been eliminated
-        // if (candidates[0].votes == min && candidates[0].votes == candidates[i].votes) 
-        
-        // :) is_tie returns false when only some of the candidates are tied
-        if (candidates[0].votes == candidates[i].votes && candidates[0].votes == candidates[candidate_count - 1].votes)
+        // :( is_tie detects tie after some candidates have been eliminated
+        // only take eliminated equals false before using below code
+        if (candidates[i].votes != min && candidates[i].eliminated == false)
         {
-            //printf("%s\n",candidates[i].name);
-            return true;
+            return false;
+
         }
     }
 
-    return false;
+    return true;
 }
 
-//:( eliminates multiple candidates in tie for last
 
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min) //*
