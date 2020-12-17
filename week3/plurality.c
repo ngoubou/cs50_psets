@@ -5,14 +5,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-/*
- * Author: Lionel Ngoubou
- * Purpose: Plurality implementation :
-   a program that runs a plurality election
- */
-
-/* “Determination, dedication, motivation“ J. Ivy */
-
 // Max number of candidates
 #define MAX 9
 
@@ -55,8 +47,7 @@ int main(int argc, string argv[])
         candidates[i].name = argv[i + 1];
         candidates[i].votes = 0;
     }
-    // printf("%i\n", candidates[0].votes);
-    // printf("%i\n", candidates[1].votes);
+   
     int voter_count = get_int("Number of voters: ");
 
     // Loop over all voters
@@ -69,9 +60,6 @@ int main(int argc, string argv[])
         {
             printf("Invalid vote.\n");
         }
-        //printf("%i\n", vote(name));
-        //printf("%i\n", candidates[i].votes);
-        //printf("%s\n", candidates[i].name);
     }
 
     // Display winner of election
@@ -79,13 +67,10 @@ int main(int argc, string argv[])
 }
 
 // Update vote totals given a new vote
-
-// A priori, the below function works
 bool vote(string name)
 {
     // Linear search: go through all candidates names
     // if it equals name of vote, increment vote count
-
     for (int j = 0; j < candidate_count; j++)
     {
         if (strcmp(name, candidates[j].name) == 0)
@@ -101,23 +86,24 @@ bool vote(string name)
 string print_winner(void)
 {
     // Sort the array in descending order
-    while (candidates[0].votes < candidates[1].votes || candidates[1].votes < candidates[2].votes || candidates[2].votes < candidates[3].votes ||
-            candidates[3].votes < candidates[4].votes || candidates[4].votes < candidates[5].votes || candidates[5].votes < candidates[6].votes ||
-            candidates[6].votes < candidates[7].votes || candidates[7].votes < candidates[8].votes)
+    while (candidates[0].votes < candidates[1].votes || candidates[1].votes < candidates[2].votes
+           || candidates[2].votes < candidates[3].votes ||
+           candidates[3].votes < candidates[4].votes || candidates[4].votes < candidates[5].votes || candidates[5].votes < candidates[6].votes
+           || candidates[6].votes < candidates[7].votes || candidates[7].votes < candidates[8].votes)
     {
         for (int i = 0; i < candidate_count; i++)
         {
             // The last condition accounts for memory issues so it doesn't access elements not in array
-            if (candidates[i].votes <= candidates[i+1].votes && i+1 < candidate_count)
+            if (candidates[i].votes <= candidates[i + 1].votes && i + 1 < candidate_count)
             {
                 int tmp = candidates[i].votes;
                 string tmp_names = candidates[i].name;
 
-                candidates[i].votes = candidates[i+1].votes;
-                candidates[i].name = candidates[i+1].name;
+                candidates[i].votes = candidates[i + 1].votes;
+                candidates[i].name = candidates[i + 1].name;
 
-                candidates[i+1].votes = tmp;
-                candidates[i+1].name = tmp_names;
+                candidates[i + 1].votes = tmp;
+                candidates[i + 1].name = tmp_names;
             }
         }
     }
@@ -128,7 +114,7 @@ string print_winner(void)
     {
         if (candidates[0].votes == candidates[i].votes)
         {
-            printf("%s\n",candidates[i].name);
+            printf("%s\n", candidates[i].name);
         }
     }
     return 0;
