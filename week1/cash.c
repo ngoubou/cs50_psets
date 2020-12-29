@@ -29,17 +29,17 @@ int main(void)
     // To handle float imprecision, we round the value to 100
     int change = round(dollars * 100);
 
-    // As long as the change is greater or equaled to the largest coin, use it
-    // and count the number of times you do an operation, ie number of coins used
     int coins = 0;
     int array[] = {25, 10, 5, 1};
-
+ 
+    // Minimum number of coins at each iteration is given by the quotient
+    // The updated change is the remainder of the division
     for (int i = 0; i < N; i++)
     {
         while (change >= array[i])
         {
-            change = change - array[i];
-            coins++;
+            coins += change / array[i];
+            change %= array[i];
         }
     }
 
