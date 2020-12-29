@@ -31,12 +31,12 @@ coins = 0
 # Create an array that'll store the coins face values
 array = [25, 10, 5, 1]
 
-# Iterate through the array and subtract the biggest value
-# As long as the change is greater or equaled to the largest coin
+ # Minimum number of coins at each iteration is given by the quotient
+ # The updated change is the remainder of the division
 for i in range(len(array)):
     while change >= array[i]:
-        change = change - array[i]
-        coins = coins + 1
+        coins += change // array[i]
+        change %= array[i]
 
 print("number of coins is " + str(coins))
 
