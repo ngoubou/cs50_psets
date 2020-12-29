@@ -1,7 +1,7 @@
 # I'm implementing CS50 problem set 1 'cash' in python.
 # This problem is also named the coin change problem
 
-# Function to dreplace the dots in input numbers
+# Function to replace the dots in input numbers
 # so i can test if it is a valid number
 def rreplace(s, old, new, occurrence):
     li = s.rsplit(old, occurrence)
